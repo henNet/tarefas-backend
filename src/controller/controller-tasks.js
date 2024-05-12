@@ -21,11 +21,23 @@ function Insert(req, res) {
 }
 
 function Update(req, res) {
-  res.status(200).send("Atualizando tarefas ...");
+  serviceTarefa.Update(req.params.id_tarefa, req.body, function (err, result) {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).json(result[0]);
+    }
+  });
 }
 
 function Delete(req, res) {
-  res.status(200).send("Excluindo tarefas ...");
+  serviceTarefa.Delete(req.params.id_tarefa, function (err, result) {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).json(result[0]);
+    }
+  });
 }
 
 export default { Select, Insert, Update, Delete };
